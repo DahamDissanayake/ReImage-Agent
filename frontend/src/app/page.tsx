@@ -87,8 +87,16 @@ export default function Home() {
       }
 
       const data = await response.json();
-      setResult(data.result);
-      setResultType(data.type || 'text'); // Default to text if backend doesn't send type
+
+      // Backend now returns { "image": "base64_string" }
+      if (data.image) {
+        setResult(data.image);
+        setResultType('image');
+      } else {
+        // Fallback for error messages
+        setResult(data.detail || 'No image returned');
+        setResultType('text');
+      }
     } catch (err: any) {
       setError(err.message || 'Something went wrong');
     } finally {
