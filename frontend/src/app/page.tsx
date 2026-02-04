@@ -88,12 +88,12 @@ export default function Home() {
 
       const data = await response.json();
 
-      // Backend now returns { "image": "base64_string" }
+
       if (data.image) {
         setResult(data.image);
         setResultType('image');
       } else {
-        // Fallback for error messages
+
         setResult(data.detail || 'No image returned');
         setResultType('text');
       }
@@ -249,7 +249,7 @@ export default function Home() {
                 <div className="w-full h-full p-4 overflow-auto flex items-center justify-center">
                   {resultType === 'image' ? (
                     <div className="relative w-full h-full min-h-[300px]">
-                      {/* Using standard img for base64 simplicity */}
+
                       <img
                         src={`data:image/png;base64,${result}`}
                         alt="Result"

@@ -10,7 +10,7 @@ from google.genai import types
 from PIL import Image
 from dotenv import load_dotenv
 
-# 1. Setup & Environment
+
 load_dotenv()
 app = FastAPI()
 
@@ -24,9 +24,8 @@ app.add_middleware(
 api_key = os.getenv("GOOGLE_API_KEY", "")
 client = genai.Client(api_key=api_key)
 
-# Configuration for Retries
 MAX_RETRIES = 3
-INITIAL_RETRY_DELAY = 5 # seconds
+INITIAL_RETRY_DELAY = 5
 
 async def call_gemini_with_retry(image_bytes, mime_type):
     """Calls Gemini with exponential backoff to handle 429 Rate Limit errors."""
@@ -55,7 +54,7 @@ async def call_gemini_with_retry(image_bytes, mime_type):
             return response
         except Exception as e:
             error_msg = str(e)
-            # Check if it's a Rate Limit error (429)
+
             if "429" in error_msg or "RESOURCE_EXHAUSTED" in error_msg:
                 if attempt < MAX_RETRIES - 1:
                     wait_time = INITIAL_RETRY_DELAY * (2 ** attempt)
@@ -67,14 +66,14 @@ async def call_gemini_with_retry(image_bytes, mime_type):
                         status_code=429, 
                         detail="Daily free quota exhausted. Please wait 24 hours or check Google AI Studio for limits."
                     )
-            raise e # Reraise other errors (400, 500, etc.)
+            raise e
 
 @app.post("/process")
 async def process_image(file: UploadFile = File(...)):
     try:
         image_bytes = await file.read()
         
-        # Execute call with retry logic
+
         response = await call_gemini_with_retry(image_bytes, file.content_type)
         
         generated_image_bytes = None
