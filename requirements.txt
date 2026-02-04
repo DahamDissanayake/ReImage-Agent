@@ -1,5 +1,5 @@
 fastapi
 uvicorn
 langchain-google-genai
-rembg
 pillow
+python-multipart
