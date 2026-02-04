@@ -8,7 +8,7 @@ Transform your portraits into high-quality cartoons using AI + Design.
 
 - Python 3.10+
 - Node.js 18+
-- Google Cloud API Key (with access to Gemini 1.5/2.5 Flash and Imagen 3/4)
+- **Google Gemini API Key** - Get from [ai.google.dev](https://ai.google.dev/)
 
 ## Setup Instructions
 
@@ -26,11 +26,11 @@ Transform your portraits into high-quality cartoons using AI + Design.
 
     _This script creates a virtual environment, activates it, and installs dependencies._
 
-3.  Configure Environment Variables:
-    - Ensure you have a `.env` file in the root directory.
-    - Add your API key:
+3.  **Configure API Key:**
+    - Create a `.env` file in the root directory
+    - Add your **Google Gemini API key**:
       ```
-      GOOGLE_API_KEY=your_api_key_here
+      GOOGLE_API_KEY=your_google_api_key_here
       ```
 
 4.  Run the Backend Server:
@@ -62,9 +62,12 @@ Transform your portraits into high-quality cartoons using AI + Design.
 ## Features
 
 - **Drag & Drop Upload**: Easy image uploading.
-- **AI Analysis**: Uses Gemini 2.5 Flash to understand the subject.
-- **Cartoon Generation**: Uses Imagen Model to generate a high-quality 3D cartoon version.
+- **AI Cartoonification**: Uses Gemini 2.5 Flash Image (Nano Banana) for direct image-to-cartoon transformation.
+- **White Background**: Automatically removes background and adds professional studio lighting.
+- **Feature Preservation**: Maintains facial features and body proportions accurately.
+- **Pastel Colors**: Pleasant, eye-catching color palette.
 - **Secure**: API keys are managed server-side.
+- **Fast Processing**: See your cartoon in 10-15 seconds.
 
 ## Troubleshooting
 
